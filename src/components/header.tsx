@@ -73,7 +73,7 @@ export const Header = () => {
                     <Menu.Button className="flex rounded-full bg-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <BellIcon
-                        className="h-6 w-6 text-cyan-200"
+                        className="h-6 w-6 text-cyan-800"
                         aria-hidden="true"
                       />
                     </Menu.Button>

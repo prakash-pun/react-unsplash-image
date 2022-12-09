@@ -44,13 +44,3 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-// {/* <div
-//   className={classNames(
-//     !loading
-//       ? "bg-gray-600 opacity-0 hover:bg-gray-400 hover:opacity-100"
-//       : "bg-gray-400 opacity-100",
-//     "absolute flex cursor-pointer content-center items-center justify-center rounded-full text-center text-xs text-gray-200"
-//   )}
-// >
-//   {!loading ? "Drag or Drop Image" : "Loading..."}
-// </div> */}

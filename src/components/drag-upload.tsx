@@ -47,7 +47,7 @@ const ImageUpload: React.FC<IAvatarUpload> = ({ avatar }) => {
   );
 
   const [files, setFiles] = useState<Blob[] | string[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const onDrop = useCallback(
     (acceptedFiles: any) => {
@@ -135,18 +135,22 @@ const ImageUpload: React.FC<IAvatarUpload> = ({ avatar }) => {
     [files]
   );
   return (
-    <div className=" items-center flex bg-slate-700 relative h-96 w-full overflow-hidden rounded-lg group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-96 lg:aspect-w-1 lg:aspect-h-1 ">
+    <div className=" items-center flex bg-slate-700 relative h-96 w-full overflow-hidden rounded-lg ">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
+        <div
+          className={classNames(
+            !loading ? "opacity-100 " : "opacity-0",
+            "absolute flex cursor-pointer content-center items-center justify-center text-center text-lg text-gray-200 h-full w-full"
+          )}
+        >
+          {!loading ? "Drag or Drop Image" : "Loading..."}
+        </div>
 
         <aside>{thumbs}</aside>
         {thumbs.length === 0 && (
           <div className="inline-block overflow-hidden rounded-lg relative h-96 w-full  group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-96 lg:aspect-w-1 lg:aspect-h-1 text-center">
-            {avatar ? (
-              <img className="" src={avatar} alt="avatar" />
-            ) : (
-              "Drag and drop image"
-            )}
+            {avatar && <img className="" src={avatar} alt="avatar" />}
           </div>
         )}
       </div>
