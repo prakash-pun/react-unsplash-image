@@ -7,8 +7,9 @@ import {
   UnsplashModal,
 } from "./components";
 import "./index.css";
+import "simplebar-react/dist/simplebar.min.css";
 
-function App() {
+export const App: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -21,20 +22,18 @@ function App() {
   return (
     <div className="bg-slate-900">
       <Header />
-      <main>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-40">
-          <div className="px-4 py-6 sm:px-0">
-            <div className="rounded-lg group">
-              <ImageUpload />
-              <Dropdown openModal={openModal} />
-            </div>
+      <div className="mx-auto max-w-7xl sm:px-6 lg:px-40">
+        <div className="px-4 pt-6 sm:px-0">
+          <div className="rounded-lg group">
+            <ImageUpload />
+            <Dropdown openModal={openModal} />
           </div>
         </div>
-      </main>
+      </div>
       <Example />
       <UnsplashModal isOpen={isOpen} closeModal={closeModal} />
     </div>
   );
-}
+};
 
 export default App;

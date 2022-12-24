@@ -9,3 +9,7 @@
   margin: 0;
   padding: 0;
 }
+
+.simplebar-scrollbar::before {
+  background-color: rgb(216, 211, 211) !important;
+}

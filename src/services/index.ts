@@ -53,3 +53,5 @@ export const getImages = async (
     };
   }
 };
+
+export * from "./reducer";

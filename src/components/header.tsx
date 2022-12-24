@@ -31,12 +31,12 @@ export const Header = () => {
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    alt="Prakash Pun"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    alt="Prakash Pun"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">

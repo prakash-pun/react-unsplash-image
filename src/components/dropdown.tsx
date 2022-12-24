@@ -1,8 +1,13 @@
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon } from "@heroicons/react/20/solid";
 
 export const Dropdown: React.FC<any> = ({ openModal }) => {
+  const inputFile: any = useRef(null);
+
+  const onClick = () => {
+    inputFile.current.click();
+  };
   return (
     <div className="relative bottom-10 right-4 text-end z-10 invisible group-hover:visible">
       <Menu as="div" className="inline-block text-left">
@@ -23,13 +28,14 @@ export const Dropdown: React.FC<any> = ({ openModal }) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
                   <button
+                    onClick={onClick}
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-violet-500 text-white" : "text-gray-200"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -43,6 +49,13 @@ export const Dropdown: React.FC<any> = ({ openModal }) => {
                         aria-hidden="true"
                       />
                     )}
+                    <input
+                      type="file"
+                      id="id"
+                      name="Image from files"
+                      className=" hidden"
+                      ref={inputFile}
+                    />
                     Image from files
                   </button>
                 )}
@@ -52,7 +65,7 @@ export const Dropdown: React.FC<any> = ({ openModal }) => {
                   <button
                     onClick={openModal}
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-violet-500 text-white" : "text-gray-200"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (
@@ -74,7 +87,7 @@ export const Dropdown: React.FC<any> = ({ openModal }) => {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? "bg-violet-500 text-white" : "text-gray-900"
+                      active ? "bg-violet-500 text-white" : "text-gray-200"
                     } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                   >
                     {active ? (

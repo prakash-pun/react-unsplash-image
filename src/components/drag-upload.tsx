@@ -85,7 +85,6 @@ const ImageUpload: React.FC<IAvatarUpload> = ({ avatar }) => {
   } = useDropzone({
     onDrop,
     onDropRejected,
-    // accept: { "image/*": [".jpeg", ".jpg", ".png"] },
     accept: { "image/png": [".png"], "image/jpeg": [".jpg", ".jpeg"] },
     noClick: true,
     // maxSize: 300 * 1024, // 300KB
@@ -135,13 +134,13 @@ const ImageUpload: React.FC<IAvatarUpload> = ({ avatar }) => {
     [files]
   );
   return (
-    <div className=" items-center flex bg-slate-700 relative h-96 w-full overflow-hidden rounded-lg ">
+    <div className=" items-center flex bg-slate-700 relative h-96 w-full overflow-hidden rounded-lg">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <div
           className={classNames(
             !loading ? "opacity-100 " : "opacity-0",
-            "absolute flex cursor-pointer content-center items-center justify-center text-center text-lg text-gray-200 h-full w-full"
+            "absolute flex cursor-pointer content-center items-center justify-center text-center text-base text-gray-300 h-full w-full"
           )}
         >
           {!loading ? "Drag or Drop Image" : "Loading..."}

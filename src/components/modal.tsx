@@ -2,6 +2,7 @@ import { Fragment, useEffect, useMemo, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import debounce from "lodash.debounce";
 import { XCircleIcon } from "@heroicons/react/24/outline";
+import SimpleBar from "simplebar-react";
 import { getImages } from "../services";
 import { Images } from "./image";
 
@@ -9,8 +10,10 @@ const NoResult = () => {
   return (
     <div className="text-center self-center h-72 flex justify-center items-center">
       <div>
-        <p className="text-2xl font-semibold">No results</p>
-        <p className="font-medium">Please update your search and try again</p>
+        <p className="text-2xl font-semibold text-gray-300">No results</p>
+        <p className="font-medium text-gray-400">
+          Please update your search and try again
+        </p>
       </div>
     </div>
   );
@@ -52,13 +55,7 @@ export const UnsplashModal: React.FC<any> = ({ isOpen, closeModal }) => {
     setQuery(event.target.value);
   };
 
-  // const clearSelected = (): void => {
-  //   setQuery("");
-  // };
-
   const debouncedResults = useMemo(() => debounce(handleChange, 300), []);
-
-  console.log(result);
 
   useEffect(() => {
     if (query) {
@@ -113,20 +110,19 @@ export const UnsplashModal: React.FC<any> = ({ isOpen, closeModal }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-3xl h-96 transform overflow-hidden rounded-md bg-white p-4 pb-0 text-left align-middle shadow-xl transition-all ">
+                <Dialog.Panel className="w-full max-w-3xl h-96 transform overflow-hidden rounded-md bg-gray-900 p-4 pb-0 text-left align-middle transition-all shadow-lg ring-1 ring-black dark:ring-gray-500 ring-opacity-5">
                   <Dialog.Title
                     as="div"
-                    className="text-lg flex justify-between font-semibold leading-6 text-gray-900 pb-2 border-b"
+                    className="text-lg flex justify-between font-semibold leading-6 text-gray-200 pb-2 border-b border-gray-500"
                   >
                     <div>Unsplash</div>
-
                     <XCircleIcon
                       onClick={closeModal}
-                      className="h-6 w-6 text-violet-200 hover:text-violet-100 cursor-pointer"
+                      className="h-6 w-6 text-violet-300 hover:text-violet-100 cursor-pointer"
                       aria-hidden="true"
                     />
                   </Dialog.Title>
-                  <div className="mt-2 ">
+                  <div className="mt-2">
                     <form className="group relative">
                       <svg
                         width="20"
@@ -142,23 +138,25 @@ export const UnsplashModal: React.FC<any> = ({ isOpen, closeModal }) => {
                         />
                       </svg>
                       <input
-                        className="focus:ring-2 focus:ring-blue-200 focus:outline-none appearance-none w-full text-base leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
+                        className="focus:ring-1 focus:ring-blue-400 focus:outline-none appearance-none w-full text-base leading-6 text-gray-200 placeholder-slate-200 rounded-md py-2 pl-10 ring-1 bg-gray-700 ring-slate-500 shadow-sm"
                         type="text"
                         aria-label="Search Photos"
                         placeholder="Search Photos"
                         onChange={debouncedResults}
                       />
                     </form>
-                    <div className=" h-72 overflow-y-scroll">
-                      {!loading ? (
-                        result && result?.results?.length ? (
-                          <Images results={result.results} />
+                    <div className="py-3 manso">
+                      <SimpleBar color="red" style={{ maxHeight: 290 }}>
+                        {!loading ? (
+                          result && result?.results?.length ? (
+                            <Images results={result.results} />
+                          ) : (
+                            <NoResult />
+                          )
                         ) : (
-                          <NoResult />
-                        )
-                      ) : (
-                        <Loading />
-                      )}
+                          <Loading />
+                        )}
+                      </SimpleBar>
                     </div>
                   </div>
                 </Dialog.Panel>
@@ -170,3 +168,21 @@ export const UnsplashModal: React.FC<any> = ({ isOpen, closeModal }) => {
     </>
   );
 };
+
+// function GridGalleryCard({ imageUrl, show }) {
+//   return (
+//     <div
+//       className={`relative transition ease-in duration-300 transform ${
+//         show ? "" : "translate-y-16 opacity-0"
+//       }`}
+//     >
+//       <div className="absolute inset-0 z-10 flex transition duration-200 ease-in hover:opacity-0">
+//         <div className="absolute inset-0 bg-black opacity-70"></div>
+//         <div className="mx-auto text-white z-10 self-center uppercase tracking-widest text-sm">
+//           Hello World
+//         </div>
+//       </div>
+//       <img src={imageUrl} alt="" />
+//     </div>
+//   );
+// }
