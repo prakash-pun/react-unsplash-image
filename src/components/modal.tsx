@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import debounce from "lodash.debounce";
 import { XCircleIcon } from "@heroicons/react/24/outline";
@@ -54,30 +54,29 @@ export const UnsplashModal: React.FC<any> = ({ isOpen, closeModal }) => {
   const handleChange = (event: any): void => {
     setQuery(event.target.value);
   };
+  const getSearchImages = useCallback(async (): Promise<void> => {
+    setLoading(true);
+    const payload = {
+      name: "Get Images",
+      endpoint: `search/photos?page=1&query=${query}&client_id=${process.env.REACT_APP_ACCESS_KEY}`,
+    };
+    const response = await getImages(payload);
+    if (response.status === "success") {
+      setResult(response?.data);
+      setLoading(false);
+    } else {
+      setLoading(false);
+      setResult([]);
+    }
+  }, [query]);
 
   const debouncedResults = useMemo(() => debounce(handleChange, 300), []);
 
   useEffect(() => {
     if (query) {
-      const getSearchImages = async (): Promise<void> => {
-        setLoading(true);
-        const payload = {
-          name: "Get Images",
-          endpoint: `search/photos?page=1&query=${query}&client_id=${process.env.REACT_APP_ACCESS_KEY}`,
-        };
-        const response = await getImages(payload);
-        if (response.status === "success") {
-          setResult(response?.data);
-          setLoading(false);
-        } else {
-          setLoading(false);
-          setResult([]);
-        }
-      };
-
       getSearchImages();
     }
-  }, [query]);
+  }, [getSearchImages, query]);
 
   useEffect(() => () => {
     debouncedResults.cancel();

@@ -3,13 +3,13 @@ import React from "react";
 const Image = ({ data }: any) => {
   const aspect = data.height <= 5000 ? "video" : "square";
   return (
-    // <a href={data.urls.regular} target="_blank" rel="noreferrer">
+    <a href={data.urls.regular} target="_blank" rel="noreferrer">
     <img
       className={`w-full aspect-${aspect} mb-6 object-cover rounded-lg shadow-md`}
       src={data.urls.small}
       alt={data.alt_description}
     />
-    // </a>
+    </a>
   );
 };
 
